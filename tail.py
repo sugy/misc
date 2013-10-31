@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import time
+
 class Tail( object ):
 
     def __init__( self, filename ):
@@ -15,14 +16,20 @@ class Tail( object ):
             else:
                 yield line
 
-import sys
-t = Tail( sys.argv[1] )
+def main():
 
-try:
-    for line in t.tail():
-        try:
-            sys.stdout.write( line )
-        except ValueError:
-            pass
-except KeyboardInterrupt:
-    pass
+    import sys
+
+    t = Tail( sys.argv[1] )
+
+    try:
+        for line in t.tail():
+            try:
+                sys.stdout.write( line )
+            except ValueError:
+                pass
+    except KeyboardInterrupt:
+        pass
+
+if __name__ == '__main__':
+    main()
